@@ -1,13 +1,13 @@
-import scrapy
 import os; print(os.getcwd())
 from scrapy.spiders import CrawlSpider
 from meizitu.items import MeizituItem
-from meizitu.util.xpathutil import XpathUtil
+from meizitu.util.MongoUtils import MongoUtils
 
 
 class MeizituSpider(CrawlSpider):
     name = "meizitu"
-    start_urls = ['http://www.meizitu.com/a/280.html']
+
+    start_urls = MongoUtils.findAllLinks(MongoUtils.create_client().meizitu)
 
     custom_settings = {
         'ITEM_PIPELINES': {
